@@ -13,7 +13,7 @@ public class VCCSprite : ManagedObject
 {
     public string key;
     public ScaleMode scaleMode;
-    
+    [SerializeField] Sprite test;
     public void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,6 +31,8 @@ public class VCCSprite : ManagedObject
 
         observableSprite = KojiBridge.ObservableSpriteOfKey(key);
         Handles.Add(observableSprite.DidChange.Subscribe(ObservableSprite_DidChange, true));
+        if(test!=null)
+            ObservableSprite_DidChange(test);
     }
 
     private SpriteRenderer spriteRenderer;

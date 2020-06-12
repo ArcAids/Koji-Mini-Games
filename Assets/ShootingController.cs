@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class ShootingController : MonoBehaviour
 {
-    [SerializeField] PivotSpinner spinner;
     [SerializeField] Bullet bulletPrefab;
     [SerializeField] Transform muzzle;
     [SerializeField] Transform aimSprite;
+    PivotSpinner spinner;
     [SerializeField] float fireRate=1;
     [SerializeField] int startingAmmo;
     [SerializeField] Cinemachine.CinemachineImpulseSource impulseSource;
 
     float nextFireTime=0;
-    bool canShoot=true;
+    bool canShoot=false;
 
+    private void Awake()
+    {
+        nextFireTime = Time.time + 1;
+    }
     public void StartShooting()
     {
         canShoot = true;
-        aimSprite?.gameObject.SetActive(true);
-        spinner?.StartSpinning();
-        spinner.Speed = Random.Range(1,5);
+        if(spinner==null)
+            TryGetComponent(out spinner);
+        if(aimSprite!=null)
+            aimSprite.gameObject.SetActive(true);
+        if (spinner!=null)
+        {
+            spinner?.StartSpinning();
+            spinner.Speed = Random.Range(1,5);
+        }
     }
 
     public void StopShooting()
@@ -39,6 +49,8 @@ public class ShootingController : MonoBehaviour
             impulseSource.GenerateImpulse();
             spinner?.StopSpinning();
             nextFireTime = Time.time + (1/fireRate);
+            if(aimSprite!=null)
+                aimSprite.gameObject.SetActive(false);
             Instantiate(bulletPrefab, muzzle.position, muzzle.rotation, null).Shoot(transform.localScale.x>0);
             return true;
         }

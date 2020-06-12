@@ -6,26 +6,26 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDie
 {
     ShootingController shooting;
+    MovementController movement;
     [SerializeField] ParticleSystem deathParticles;
-
     bool isDead = false;
-    private void Awake()
+    public void Init()
     {
-        TryGetComponent<ShootingController>(out shooting);
+        TryGetComponent(out shooting);
+        TryGetComponent(out movement);
+        movement.Init();
+        shooting.StartShooting();
     }
 
-    private void Start()
+    public void ResetEnemy(bool right,float height)
     {
-
-        MoveToPosition(transform.position);
-    }
-
-    public void ResetEnemy()
-    {
+        movement.ResetRigid();
         isDead = false;
-        Vector2 originalPosition= new Vector2(-transform.position.x, transform.position.y + 7);
+        gameObject.SetActive(true);
+        int direction = right ? 1 : -1;
+        Vector2 originalPosition= new Vector2(7.5f*direction, height);
         MoveToPosition(originalPosition);
-        transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
+        movement.Flip();
         
     }
 
@@ -40,22 +40,14 @@ public class Enemy : MonoBehaviour, IDie
         shooting.Shoot();
     }
 
-    public void Dead()
+    public void Dead(Vector2 hitPosition)
     {
-        isDead = true;
+        isDead = true; 
 
         deathParticles.transform.parent = null;
-        deathParticles.transform.position = transform.position;
-        deathParticles.transform.localScale = transform.localScale;
-        //Quaternion rotation= deathParticles.transform.localRotation;
-        //if(transform.localScale.x<0)
-        //    rotation.eulerAngles.Set(rotation.eulerAngles.x,180,rotation.eulerAngles.z);
-        //else
-        //    rotation.eulerAngles.Set(rotation.eulerAngles.x,0,rotation.eulerAngles.z);
-        //deathParticles.transform.localRotation = rotation;
+        deathParticles.transform.position = hitPosition;
         deathParticles.Play();
-
-        GameManager.Instance.LevelCompleted();
+        movement.BlastAway();
     }
 
     public bool IsDead()
@@ -68,5 +60,5 @@ public class Enemy : MonoBehaviour, IDie
 
 internal interface IDie
 {
-    void Dead();
+    void Dead(Vector2 hitPosition);
 }

@@ -6,9 +6,11 @@ public class BallController : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] PathManager pathManager;
+    [SerializeField] MaterialOffsetScroller scroller;
 
     Rigidbody rigid;
     bool goingRight = true;
+    bool canPlay = false;
 
     Vector3 velocity;
     Vector3 angularVelocity;
@@ -23,17 +25,31 @@ public class BallController : MonoBehaviour
         Handles.Add(
             KojiBridge.ObservableNumberOfKey("game.ball_speed").DidChange.Subscribe(UpdateSpeed, true)
         );
+        
+    }
+
+    public void StartGame()
+    {
+        canPlay = true;
+        scroller.SetSpeed(speed*0.1f);
     }
 
     void UpdateSpeed(float newSpeed)
     {
+#if !UNITY_EDITOR
         speed=Mathf.Clamp(newSpeed, 1, 20);
+        scroller.SetSpeed(speed);
+#endif
     }
 
     private void Update()
     {
+        if (!canPlay)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
+            scroller.canPlay = true;
+            scroller.ChangeDirection();
             if(goingRight)
             {
                 goingRight = false;
@@ -76,6 +92,9 @@ public class BallController : MonoBehaviour
         rigid.angularVelocity = angularVelocity;
         if (transform.position.y <= -1)
         {
+            canPlay = false;
+            scroller.canPlay = false;
+            GetComponent<Disabler>().DisableWithDelay();
             GameManager.Instance.GameOver();
         }
     }

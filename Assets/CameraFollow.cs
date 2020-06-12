@@ -13,8 +13,10 @@ public class CameraFollow : MonoBehaviour
     {
         offset = transform.position-target.position;
     }
-    void FixedUpdate()
+    void Update()
     {
-        transform.position=target.position+offset;
+        Vector3 position=target.position+offset;
+        position.y = transform.position.y;
+        transform.position = position;
     }
 }

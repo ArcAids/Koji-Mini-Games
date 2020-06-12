@@ -31,6 +31,7 @@ public class SceneController : ScriptableObject
 
     public string GetRandomTip()
     {
+
         if (tips != null && tips.Count > 0)
             return tips[Random.Range(0, tips.Count - 1)];
         else

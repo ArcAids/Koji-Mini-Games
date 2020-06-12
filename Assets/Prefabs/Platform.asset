@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 32
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Platform
   m_EditorClassIdentifier: 
   prefab: {fileID: 4977582462181697358, guid: ba764df5f7111d94494e2d3b33d15a8f, type: 3}
-  prePooledNumber: 30
-  maxPoolCapacity: 100
+  prePooledNumber: 15
+  maxPoolCapacity: 30
   extendingAllowed: 1
   recycling: 0
   persists: 0

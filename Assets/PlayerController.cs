@@ -6,15 +6,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IDie
 {
     ShootingController shooting;
+    MovementController movement;
     [SerializeField] ParticleSystem deathParticles;
     private void Awake()
     {
-        TryGetComponent<ShootingController>(out shooting);
-        
+        TryGetComponent(out shooting);
+        TryGetComponent(out movement);
+        movement.Init();
     }
-    private void Start()
+    public void StartGame()
     {
         shooting.StartShooting();
+
     }
 
     private void Update()
@@ -28,21 +31,16 @@ public class PlayerController : MonoBehaviour, IDie
         }
     }
 
-    public void Dead()
+    public void Dead(Vector2 hitPosition)
     {
         deathParticles.transform.parent = null;
-        deathParticles.transform.position = transform.position;
-        deathParticles.transform.localScale = transform.localScale;
-        //Quaternion rotation= deathParticles.transform.localRotation;
-        //if(transform.localScale.x<0)
-        //    rotation.eulerAngles.Set(rotation.eulerAngles.x,180,rotation.eulerAngles.z);
-        //else
-        //    rotation.eulerAngles.Set(rotation.eulerAngles.x,0,rotation.eulerAngles.z);
-        //deathParticles.transform.localRotation = rotation;
+        deathParticles.transform.position = hitPosition;
+
         deathParticles.Play();
 
         StopAllCoroutines();
         shooting.StopShooting();
+        movement.BlastAway();
         GameManager.Instance.GameOver();
     }
 
@@ -56,11 +54,11 @@ public class PlayerController : MonoBehaviour, IDie
     {
         while (transform.position.x != position.x)
         {
-            transform.position = Vector2.MoveTowards(transform.position,position,Time.deltaTime *10);
+            transform.position = Vector2.MoveTowards(transform.position,position,Time.deltaTime *20);
             yield return null;
 
         }
-        transform.localScale = new Vector3(-transform.localScale.x,1,1);
+        movement.Flip();
         shooting.StartShooting();
     }
 }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] LevelManager levelManager;
     [SerializeField] PlayerController player;
     [SerializeField] GameObject gameOverScreen;
-    [SerializeField] Enemy enemy;
+    [SerializeField] EnemyManager enemy;
     public static GameManager Instance;
     private void Awake()
     {
@@ -18,7 +18,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
     
+    public void StartGame()
+    {
+        player.StartGame();
+        enemy.NextLevel();
+    }
+
     public void GameOver()
+    {
+        Invoke("ShowEndScreen", 1);
+    }
+
+    void ShowEndScreen()
     {
         gameOverScreen.SetActive(true);
     }
@@ -28,7 +39,7 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         levelManager.MoveToNextLevel();
         player.StartMovingToNextLocation();
-        enemy.ResetEnemy();
+        enemy.NextLevel();
     }
 
     IEnumerator WaitForEnemyTurn()
@@ -36,6 +47,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (!enemy.IsDead())
             enemy.ShootAtPlayer();
+        else
+            LevelCompleted();
     }
 
     internal void DonePlayerTurn()

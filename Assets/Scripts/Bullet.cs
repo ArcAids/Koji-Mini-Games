@@ -12,10 +12,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDie victim = collision.GetComponent<IDie>();
+        IDie victim = collision.GetComponentInParent<IDie>();
         if (victim!=null)
         {
-            victim.Dead();
+            victim.Dead(transform.position);
             GetComponent<Disabler>().Destroy();
         }
     }

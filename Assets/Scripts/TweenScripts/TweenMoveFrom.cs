@@ -17,7 +17,7 @@ public class TweenMoveFrom : MonoBehaviour
     void Awake()
     {
         originalPosition=transform.localPosition;
-        //Play();
+        Play();
     }
     public void Play()
     {

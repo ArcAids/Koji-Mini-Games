@@ -7,9 +7,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] List<GameLevel> levels;
     [SerializeField] CameraTarget cameraTarget;
     [SerializeField] TMPro.TMP_Text currentLevelText;
-
-    float currentHeight=-14;
+    [SerializeField] TMPro.TMP_Text highestLevelText;
+    [SerializeField] GameObject highestScoreText;
+    [SerializeField] GameObject gameOverText;
+    
+    float currentHeight=-28;
     int currentLevelIndex = 0;
+    int recordKills;
     private void Start()
     {
         foreach (var level in levels)
@@ -19,6 +23,9 @@ public class LevelManager : MonoBehaviour
             currentHeight+=7;
         }
         UpdateLevels();
+        recordKills = PlayerPrefs.GetInt("RecordKills", 0);
+        currentLevelText.text = "Kills: 0";
+        highestLevelText.text = "Record Kills: " + recordKills;
     }
 
     public void MoveToNextLevel()
@@ -30,7 +37,16 @@ public class LevelManager : MonoBehaviour
         currentHeight += 7;
         levels.Add(level);
         currentLevelIndex++;
-        currentLevelText.text = "Level: "+currentLevelIndex;
+        currentLevelText.text = "Kills: "+currentLevelIndex;
+
+        if (currentLevelIndex > recordKills)
+        {
+            highestScoreText.SetActive(true);
+            gameOverText.SetActive(false);
+            highestLevelText.text = "Record Kills: " + currentLevelIndex;
+            PlayerPrefs.SetInt("RecordKills", currentLevelIndex);
+        }
+
         UpdateLevels();
     }
 

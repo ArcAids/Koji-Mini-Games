@@ -5,15 +5,17 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField]
+    GameObject scoreBoard;
+    [SerializeField]
     int balls = 3;
     [SerializeField]
     float speed = 5f;
     [SerializeField]
     float maxSpeedForGoal = 0.1f;
     [SerializeField] CourseManager courseManager;
-    [SerializeField] TMPro.TMP_Text goalsText;
 
-    int goals;
+    AudioSource audioSource;
+
     bool inHole = false;
     bool aiming;
     bool ready;
@@ -28,7 +30,13 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        TryGetComponent(out audioSource);
+    }
+
+    public void StartGame()
+    {
         canPlay=true;
+
     }
 
     private void Update()
@@ -36,29 +44,31 @@ public class Ball : MonoBehaviour
         if (!canPlay) return;
         if (rigid.velocity.magnitude <= 0.1f && inHole == false)
         {
+            rigid.velocity = Vector2.zero;
             ready = true;
+            scoreBoard.SetActive(true);
         } else
         {
             ready = false;
         }
 
-        if(ready && wasFinalMove)
-        {
-            balls--;
-            StopAllCoroutines();
-            canPlay = false;
-            if (balls == 0)
-            {
-                GameManager.Instance.GameOver();
-            }
-            else
-            {
-                courseManager.ResetCourse();
-                wasFinalMove = false;
-                canPlay = true;
-            }
-            return;
-        }
+        //if(ready && wasFinalMove)
+        //{
+        //    balls--;
+        //    StopAllCoroutines();
+        //    canPlay = false;
+        //    if (balls == 0)
+        //    {
+        //        GameManager.Instance.GameOver();
+        //    }
+        //    else
+        //    {
+        //        courseManager.ResetCourse();
+        //        wasFinalMove = false;
+        //        canPlay = true;
+        //    }
+        //    return;
+        //}
 
         if (Input.GetMouseButtonDown(0) && !aiming && ready)
         {
@@ -104,13 +114,14 @@ public class Ball : MonoBehaviour
         aiming = false;
         canPlay = false;
         StartCoroutine(ShotDelay());
+        scoreBoard.SetActive(true);
         line.enabled = false;
         if (Vector2.Distance(startPos, endPos) > maxDistance)
         {
 
         }
         Vector2 direction = startPos - endPos;
-        rigid.AddForce(direction * speed);
+        rigid.AddForce(direction * speed, ForceMode2D.Impulse);
         if (courseManager.ShotMade())
         {
             wasFinalMove = true;
@@ -120,12 +131,17 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Entered At :" + rigid.velocity.magnitude);
         if (collision.transform.tag == "Hole" && rigid.velocity.magnitude <= maxSpeedForGoal)
         {
+            Debug.Log("Entered At :" + rigid.velocity.magnitude);
             StartCoroutine(Goal(collision.gameObject));
             transform.position = collision.transform.position;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        audioSource.PlayOneShot(audioSource.clip,rigid.velocity.magnitude*0.1f);
     }
 
     IEnumerator Goal(GameObject target)
@@ -136,20 +152,20 @@ public class Ball : MonoBehaviour
         wasFinalMove = false;
         canPlay = false;
         targetGoal = target;
-        goals++;
-        goalsText.text = "Holes: "+goals;
+
         //@TODO: Play Goal Sound Here
-        yield return new WaitForSeconds(2.0f);
+        courseManager.OnHole();
+        yield return null;
 
-        Debug.Log("Goal Works!");
-        courseManager.ActivateRandomCourse();
+    }
 
+    public void NextLevel()
+    {
+        courseManager.ActivateNextCourse();
         ready = true;
         inHole = false;
         canPlay = true;
-        // ELSE
-        // StartCoroutine(EndGame());
-        Debug.Log("Game Ended");
+
     }
 
     IEnumerator ShotDelay()
