@@ -18,15 +18,6 @@ public class BallController : MonoBehaviour
     {
         TryGetComponent(out rigid);
     }
-    protected List<Handle> Handles { get; private set; }
-    private void Start()
-    {
-        Handles = new List<Handle>();
-        Handles.Add(
-            KojiBridge.ObservableNumberOfKey("game.ball_speed").DidChange.Subscribe(UpdateSpeed, true)
-        );
-        
-    }
 
     public void StartGame()
     {

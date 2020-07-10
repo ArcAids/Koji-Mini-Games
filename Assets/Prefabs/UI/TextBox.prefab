@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6089520803859202261}
   - component: {fileID: 6089520803859202259}
   - component: {fileID: 6089520803859202260}
-  - component: {fileID: 5408100031909693215}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -157,19 +156,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5408100031909693215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6089520803859202262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354f82cd4cf3e1a4f97709fa86c54084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: tutorial.dialogue
 --- !u!1 &6089520804102783214
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +167,6 @@ GameObject:
   - component: {fileID: 6089520804102783213}
   - component: {fileID: 6089520804102783211}
   - component: {fileID: 6089520804102783212}
-  - component: {fileID: 6477321156394618233}
   m_Layer: 5
   m_Name: TextBox
   m_TagString: Untagged
@@ -245,16 +230,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.01
---- !u!114 &6477321156394618233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6089520804102783214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 270058b34a8b77849a7e77489a5345d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: game.water_color

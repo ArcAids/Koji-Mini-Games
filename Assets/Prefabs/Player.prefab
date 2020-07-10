@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 683267735032178789}
   - component: {fileID: 683267735032178790}
-  - component: {fileID: 2793614838026409328}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -83,21 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2793614838026409328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683267735032178788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10be82df39bfeab4da146a097a0aded4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: game.gun
-  scaleMode: 2
-  test: {fileID: 0}
 --- !u!1 &683267735177616443
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +92,6 @@ GameObject:
   m_Component:
   - component: {fileID: 683267735177616436}
   - component: {fileID: 683267735177616437}
-  - component: {fileID: 7674521239577226555}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -181,21 +164,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7674521239577226555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683267735177616443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10be82df39bfeab4da146a097a0aded4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: game.enemy
-  scaleMode: 1
-  test: {fileID: 0}
 --- !u!1 &683267735491130073
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +401,6 @@ GameObject:
   m_Component:
   - component: {fileID: 683267735616203452}
   - component: {fileID: 683267735616203453}
-  - component: {fileID: 4298188534748048401}
   m_Layer: 0
   m_Name: Arm (1)
   m_TagString: Untagged
@@ -505,19 +472,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4298188534748048401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683267735616203395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c70179a2f9a5b949b5881556c152ba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: game.player_body
 --- !u!1 &683267735929636923
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +513,6 @@ GameObject:
   m_Component:
   - component: {fileID: 683267736391849804}
   - component: {fileID: 683267736391849805}
-  - component: {fileID: 5869456418981926364}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -631,19 +584,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5869456418981926364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683267736391849811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c70179a2f9a5b949b5881556c152ba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: game.player_body
 --- !u!1 &683267736619934899
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +594,6 @@ GameObject:
   m_Component:
   - component: {fileID: 683267736619934892}
   - component: {fileID: 683267736619934893}
-  - component: {fileID: 7626728473402829404}
   m_Layer: 0
   m_Name: head
   m_TagString: Untagged
@@ -726,19 +665,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7626728473402829404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683267736619934899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c70179a2f9a5b949b5881556c152ba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: game.player_body
 --- !u!1 &4484333051067772574
 GameObject:
   m_ObjectHideFlags: 0
