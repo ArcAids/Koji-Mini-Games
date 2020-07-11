@@ -389,6 +389,11 @@ PrefabInstance:
       propertyPath: onFinishTutorial.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3819272469301833848, guid: ded6867d1e9cfd44581dbeace5edb7b6,
+        type: 3}
+      propertyPath: showTutorialPrefString
+      value: TutorialGolf
+      objectReference: {fileID: 0}
     - target: {fileID: 6336663809401425558, guid: ded6867d1e9cfd44581dbeace5edb7b6,
         type: 3}
       propertyPath: m_fontAsset
@@ -872,7 +877,7 @@ RectTransform:
   m_GameObject: {fileID: 274855165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1211131034}
   m_RootOrder: 2
@@ -897,10 +902,10 @@ MonoBehaviour:
   startOnAwake: 1
   delay: 0
   speed: 0.4
-  newXScale: 0
-  newYScale: 0
+  newXScale: 1
+  newYScale: 1
   ease: 4
-  loops: 1
+  loops: 0
   loopingType: 1
 --- !u!114 &274855169
 MonoBehaviour:
@@ -2083,6 +2088,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holePosition: {fileID: 1612931069}
   maxMovesAllowed: 3
+--- !u!1 &878897803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 878897805}
+  - component: {fileID: 878897804}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &878897804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878897803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 4b71863a7722d0c42a465911b41e0f8e, type: 2}
+--- !u!4 &878897805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878897803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.044882, y: 6.779159, z: -11.117957}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &897451164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,7 +2481,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3427,8 +3480,8 @@ MonoBehaviour:
   startOnAwake: 1
   delay: 0
   speed: 1
-  newXScale: 0
-  newYScale: 0
+  newXScale: 1
+  newYScale: 1
   ease: 17
   loops: 0
   loopingType: 0

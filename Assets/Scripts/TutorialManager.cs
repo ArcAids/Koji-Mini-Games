@@ -10,7 +10,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] UnityEvent onFinishTutorial;
     [SerializeField] GameObject tutorialWindow;
 
-    const string showTutorialPrefString= "Tutorial";
+    [SerializeField] string showTutorialPrefString= "Tutorial";
 
     public bool TutorialToShow { get => PlayerPrefs.GetInt(showTutorialPrefString, 1) == 1; set => PlayerPrefs.SetInt(showTutorialPrefString, value ? 1 : 0); }
 
